@@ -1,4 +1,4 @@
-# react-native-map-library
+# rn-map-carousel
 
 Una librería de React Native para mostrar e interactuar con mapas ,marcadores y un carrousel.
 
@@ -6,12 +6,12 @@ Una librería de React Native para mostrar e interactuar con mapas ,marcadores y
 
 ### Usando npm
     
-    npm install react-native-map-library
+    npm install rn-map-carousel
 
 
 ### Usando yarn
     
-    npm install react-native-map-library
+    npm install rn-map-carousel
 
 ## Configuración de Google Maps
 
@@ -56,7 +56,7 @@ Aquí tienes un ejemplo de cómo usar la biblioteca del mapa con un componente d
 <code>
     import { useState, useEffect, useRef } from 'react';
     import { StyleSheet, View, SafeAreaView } from 'react-native';
-    import MapLibrary, { Carousel, MapView, registerMarkerSelectListener } from 'react-native-map-library';
+    import MapLibrary, { Carousel, MapView, registerMarkerSelectListener } from 'rn-map-carousel';
 
     interface Coordenadas {
     latitud: number;

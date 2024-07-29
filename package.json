@@ -1,5 +1,5 @@
 {
-  "name": "react-native-map-library",
+  "name": "rn-map-carousel",
   "version": "0.1.0",
   "description": "map library",
   "source": "./src/index.tsx",
