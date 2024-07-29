@@ -1,5 +1,11 @@
-import { NativeModules, Platform } from 'react-native';
-
+import {
+  NativeModules,
+  NativeEventEmitter,
+  Platform,
+  requireNativeComponent,
+  type ViewStyle,
+} from 'react-native';
+import Carousel from './Carousel';
 const LINKING_ERROR =
   `The package 'react-native-map-library' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
@@ -17,6 +23,35 @@ const MapLibrary = NativeModules.MapLibrary
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return MapLibrary.multiply(a, b);
+const RCTMapView = requireNativeComponent('RCTMapView');
+
+type MapLibraryType = {
+  addMarker: (
+    latitude: number,
+    longitude: number,
+    title: string,
+    snippet: string
+  ) => Promise<string>;
+};
+
+const mapLibrary: MapLibraryType = {
+  addMarker: (latitude, longitude, title, snippet) => {
+    return MapLibrary.addMarker(latitude, longitude, title, snippet);
+  },
+};
+
+type MapViewProps = {
+  style?: ViewStyle;
+};
+
+export const MapView = (props: MapViewProps) => <RCTMapView {...props} />;
+export function registerMarkerSelectListener(callback: (event: any) => void) {
+  const eventEmitter = new NativeEventEmitter(MapLibrary);
+  const eventListener = eventEmitter.addListener('onMarkerSelect', callback);
+
+  return () => {
+    eventListener.remove();
+  };
 }
+export { Carousel };
+export default mapLibrary;

@@ -23,6 +23,8 @@ public class MapLibraryPackage implements ReactPackage {
   @NonNull
   @Override
   public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
-    return Collections.emptyList();
+    List<ViewManager> viewManagers = new ArrayList<>();
+    viewManagers.add(new MapViewManager());
+    return viewManagers;
   }
 }

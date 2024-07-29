@@ -17,6 +17,10 @@ end
 target 'MapLibraryExample' do
   config = use_native_modules!
 
+    # Add this line
+  #pod 'GoogleMaps'
+  pod 'react-native-map-library', :path => '../..'
+
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.

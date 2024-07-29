@@ -1,22 +1,85 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-map-library';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
+import MapLibrary, {
+  Carousel,
+  MapView,
+  registerMarkerSelectListener,
+} from 'react-native-map-library';
+
+interface Coordenadas {
+  latitud: number;
+  longitud: number;
+}
+
+interface Beneficio {
+  id: string;
+  titulo: string;
+  descripcion: string;
+  imagen: string;
+  promocion: string;
+  direccion: string;
+  coordenadas: Coordenadas;
+}
 
 export default function App() {
-  const [result, setResult] = useState<number | undefined>();
-
+  const [beneficios, setBeneficios] = useState<Beneficio[]>([]);
   useEffect(() => {
-    multiply(3, 7).then(setResult);
+    const unregisterListener = registerMarkerSelectListener((event) => {
+      console.log('Marker seleccionado', event);
+    });
+
+    const fetchData = async () => {
+      try {
+        const responseData = await fetch(
+          'https://demo1012858.mockable.io/benefits'
+        );
+        if (!responseData.ok) {
+          throw new Error('Sucedio un error');
+        }
+        const response = await responseData.json();
+        setBeneficios(response.data);
+        for (const benefit of response.data) {
+          console.log('Agregando el beneficio', benefit);
+          addMarker(benefit);
+        }
+      } catch (error) {
+        console.error((error as { message: string }).message);
+      }
+    };
+    fetchData();
+
+    return () => {
+      unregisterListener();
+    };
   }, []);
 
+  const addMarker = async (benefit: Beneficio) => {
+    try {
+      await MapLibrary.addMarker(
+        benefit.coordenadas.latitud,
+        benefit.coordenadas.longitud,
+        benefit.titulo,
+        benefit.id
+      );
+    } catch (error) {
+      console.error('RN Error:', error);
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
+    <View style={styles.bg}>
+      <SafeAreaView style={styles.container}>
+        <MapView style={styles.map} />
+        <Carousel items={beneficios} />
+      </SafeAreaView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  bg: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -26,5 +89,9 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     marginVertical: 20,
+  },
+  map: {
+    height: '100%',
+    width: '100%',
   },
 });
