@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-map-library": ["./src/index"]
+      "rn-map-carousel": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

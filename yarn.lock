@@ -10881,16 +10881,9 @@ __metadata:
     babel-plugin-module-resolver: ^5.0.0
     react: 18.2.0
     react-native: 0.74.3
-    react-native-map-library: ^0.0.1
+    rn-map-carousel: ^0.2.0
   languageName: unknown
   linkType: soft
-
-"react-native-map-library@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "react-native-map-library@npm:0.0.1"
-  checksum: b013599c21c7258a5876e7e21fe4791f50242a33e0dcde0caaa927fc675503080fb76ffd8b5e61f9d99af5804e020dd73eda6c2dbf2d6258c099e2f14731ad89
-  languageName: node
-  linkType: hard
 
 "react-native@npm:0.74.3":
   version: 0.74.3
@@ -11465,7 +11458,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rn-map-carousel@workspace:.":
+"rn-map-carousel@^0.2.0, rn-map-carousel@workspace:.":
   version: 0.0.0-use.local
   resolution: "rn-map-carousel@workspace:."
   dependencies:
