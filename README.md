@@ -34,6 +34,11 @@ Agrega tu clave de API de Google Maps en tu archivo AndroidManifest.xml:
 </manifest>
 </xml>
 
+#### Actualizar gradle-wrapper.properties
+Asegúrate de que tu archivo gradle-wrapper.properties contenga la siguiente configuración:
+```
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.8-bin.zip
+```
 ## iOS
 Agrega tu clave de API de Google Maps en tu archivo AppDelegate:
 
