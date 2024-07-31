@@ -11,11 +11,11 @@ Una librería de React Native para mostrar e interactuar con mapas ,marcadores y
 
 ### Usando yarn
     
-    npm install rn-map-carousel
+    yarn add rn-map-carousel
 
 ## Configuración de Google Maps
 
-### Android
+## Android
 
 Agrega tu clave de API de Google Maps en tu archivo AndroidManifest.xml:
 
@@ -34,20 +34,43 @@ Agrega tu clave de API de Google Maps en tu archivo AndroidManifest.xml:
 </manifest>
 </xml>
 
-### iOS
+## iOS
+Agrega tu clave de API de Google Maps en tu archivo AppDelegate:
 
-<code>
-    #import <GoogleMaps/GoogleMaps.h>
+```objective-c
+#import <GoogleMaps/GoogleMaps.h>
 
-    @implementation AppDelegate
+@implementation AppDelegate
 
-    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-        [GMSServices provideAPIKey:@"TU_CLAVE_DE_API_DE_GOOGLE_MAPS"];
-        ...
-        return YES;
-    }
-    @end
-</code>
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [GMSServices provideAPIKey:@"TU_CLAVE_DE_API_DE_GOOGLE_MAPS"];
+    // ...
+}
+@end
+```
+
+Asegúrate de que tu `Podfile` especifica un mínimo de iOS 13 (obviarlo si ya esta especificado en el proyecto):
+
+```ruby
+platform :ios, '13.0'
+```
+
+### Si estás utilizando CocoaPods versión 1.15.0 o mayor
+Añade la siguiente línea a tu Gemfile para usar la versión 1.14.0 de CocoaPods:
+
+```ruby
+gem 'cocoapods', '1.14.0'
+```
+
+Luego, instala la versión especificada de CocoaPods:
+```sh
+bundle install
+```
+Instala las dependencias de CocoaPods:
+```sh
+cd ios
+bundle exec pod install
+```
 
 ## Uso
 
